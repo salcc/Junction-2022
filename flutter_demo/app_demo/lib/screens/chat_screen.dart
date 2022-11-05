@@ -75,7 +75,7 @@ class _CustomAppBar extends StatelessWidget with PreferredSizeWidget {
           Container(
               margin: const EdgeInsets.only(right: 10),
               child: CircleAvatar(
-                backgroundImage: NetworkImage(user.imageUrl),
+                backgroundImage: AssetImage(user.imagePath),
               ))
         ]);
   }
