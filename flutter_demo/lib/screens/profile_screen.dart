@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../models/chat_model.dart';
-import '../models/message_model.dart';
 import '../models/user_model.dart';
 import '../widgets/bottom_bar.dart';
-import '../widgets/main_container.dart';
 import '../widgets/mood_chart.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -39,7 +35,7 @@ class ProfileScreen extends StatelessWidget {
         //   elevation: 0,
         // ),
         body: Column(children: [
-          const SizedBox(height: 30),
+          const SizedBox(height: 25),
           _ProfileBar(height: height, width: width, user: users[0]),
           Expanded(
             child: Stack(

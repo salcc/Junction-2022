@@ -24,7 +24,7 @@ class BottomBar extends StatelessWidget {
               )
             ],
             borderRadius: BorderRadius.circular(15),
-            color: Theme.of(context).colorScheme.primary.withAlpha(200)),
+            color: Theme.of(context).colorScheme.primary.withAlpha(255)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
