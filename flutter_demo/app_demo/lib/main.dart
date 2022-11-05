@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'screens/home_screen.dart';
-import 'screens/chat_screen.dart';
-
 import 'config/theme.dart';
+import 'screens/chat_screen.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
