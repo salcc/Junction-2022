@@ -39,8 +39,55 @@ class HomeScreen extends StatelessWidget {
         ),
         body: Column(children: [
           _SocialBar(height: height, users: users),
-          _ChatPreview(height: height, chats: chats),
+          Expanded(
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                _ChatPreview(height: height, chats: chats),
+                _BottomBar(width: width),
+              ],
+            ),
+          ),
         ]),
+      ),
+    );
+  }
+}
+
+class _BottomBar extends StatelessWidget {
+  const _BottomBar({Key? key, required this.width}) : super(key: key);
+
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        height: 65,
+        width: width * 0.5,
+        margin: const EdgeInsets.only(bottom: 30),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: Theme.of(context).colorScheme.secondary.withAlpha(150)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Material(
+              color: Colors.transparent,
+              child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.person_outline_outlined)),
+            ),
+            const SizedBox(width: 20),
+            Material(
+              color: Colors.transparent,
+              child: IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.message_outlined)),
+            ),
+          ],
+        ),
       ),
     );
   }
