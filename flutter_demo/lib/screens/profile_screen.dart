@@ -6,8 +6,8 @@ import '../models/message_model.dart';
 import '../models/user_model.dart';
 import '../widgets/main_container.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +85,9 @@ class _BottomBar extends StatelessWidget {
             Material(
               color: Colors.transparent,
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed('/profile');
+                  },
                   icon: const Icon(
                       color: Colors.black, Icons.person_outline_outlined)),
             ),
@@ -93,7 +95,9 @@ class _BottomBar extends StatelessWidget {
             Material(
               color: Colors.transparent,
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed('/social');
+                  },
                   icon:
                       const Icon(color: Colors.black, Icons.message_outlined)),
             ),
