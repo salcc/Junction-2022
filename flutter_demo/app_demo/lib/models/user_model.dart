@@ -12,6 +12,7 @@ class User {
   });
 
   static const List<User> users = [
-    User(id: '1', name: 'John', surname: 'WH', imageUrl: 'www.xxx.com')
+    User(id: '1', name: 'John', surname: 'WH', imageUrl: ''),
+    User(id: '2', name: 'Maria', surname: 'JK', imageUrl: ''),
   ];
 }

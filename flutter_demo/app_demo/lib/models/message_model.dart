@@ -17,6 +17,12 @@ class Message {
       recipientId: '2',
       text: 'Hello',
       createdAt: DateTime(2022, 08, 01, 10, 10, 10),
-    )
+    ),
+    Message(
+      senderId: '2',
+      recipientId: '1',
+      text: 'Hey',
+      createdAt: DateTime(2022, 08, 01, 10, 15, 32),
+    ),
   ];
 }
