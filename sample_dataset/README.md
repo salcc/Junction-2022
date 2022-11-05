@@ -10,8 +10,8 @@ The dataset definition has the following contents:
             "age" : "<integer>",
             "gender" : "<Female | Male | Other>" ,
             "occupation_status" : "<Student & Employed | Student | Employed | Unemployed>",
-            "description" : "<string>"
-            "tokenization" : "<list of integers>"
+            "description" : "<string>",
+            "tokenization" : "<null or list of integers>"
         }
     }
 ```
