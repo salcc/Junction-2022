@@ -6,6 +6,7 @@ import '../models/message_model.dart';
 import '../models/user_model.dart';
 import '../widgets/bottom_bar.dart';
 import '../widgets/main_container.dart';
+import '../widgets/mood_chart.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -15,7 +16,6 @@ class ProfileScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     List<User> users = User.users;
-    List<Chat> chats = Chat.chats;
 
     return Container(
       decoration: BoxDecoration(
@@ -40,12 +40,13 @@ class ProfileScreen extends StatelessWidget {
         // ),
         body: Column(children: [
           const SizedBox(height: 30),
-          _SocialBar(height: height, users: users),
+          _ProfileBar(height: height, width: width, user: users[0]),
           Expanded(
             child: Stack(
-              fit: StackFit.expand,
+              alignment: Alignment.topCenter,
               children: [
-                // _ChatPreview(height: height, chats: chats),
+                const Padding(
+                    padding: EdgeInsets.all(20.0), child: MoodBarChart()),
                 BottomBar(width: width),
               ],
             ),
@@ -56,45 +57,68 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-class _SocialBar extends StatelessWidget {
-  const _SocialBar({
+class _ProfileBar extends StatelessWidget {
+  const _ProfileBar({
     Key? key,
     required this.height,
-    required this.users,
+    required this.width,
+    required this.user,
   }) : super(key: key);
 
   final double height;
-  final List<User> users;
+  final double width;
+  final User user;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height * 0.125,
-      margin: const EdgeInsets.only(left: 20, top: 20),
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          shrinkWrap: true,
-          itemCount: users.length,
-          itemBuilder: (context, index) {
-            User user = users[index];
-            return Container(
-                margin: const EdgeInsets.only(right: 10),
+        height: height * 0.2,
+        margin: const EdgeInsets.only(left: 20, top: 20),
+        child: Row(
+          children: [
+            Container(
+                alignment: Alignment.centerLeft,
+                margin: const EdgeInsets.only(left: 10, right: 10),
                 child: Column(
                   children: [
                     CircleAvatar(
-                        radius: 35,
+                        radius: 60,
                         backgroundImage: AssetImage(user.imagePath)),
-                    const SizedBox(height: 10),
-                    Text(
-                      user.name,
+                  ],
+                )),
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: const EdgeInsets.only(left: 20, top: 10),
+              width: width * 0.475,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${user.name} ${user.surname}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
+                  const SizedBox(height: 10),
+                  Text('${user.age}, ${user.gender}',
                       style: Theme.of(context)
                           .textTheme
-                          .bodyMedium!
+                          .titleMedium!
                           .copyWith(fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ));
-          }),
-    );
+                      textAlign: TextAlign.left),
+                  const SizedBox(height: 10),
+                  Text(
+                    user.description,
+                    style: Theme.of(context).textTheme.bodySmall,
+                    textAlign: TextAlign.justify,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ));
   }
 }
