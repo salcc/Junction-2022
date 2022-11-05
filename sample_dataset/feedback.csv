@@ -1,0 +1,6 @@
+user_id;group_peers_ids;date;feedback_action
+1;1,2,3;28-10-2022;Later
+1;1,2,3;05-10-2022;Helpful
+2;1,2,3;29-10-2022;Helpful
+2;1,2,3;05-10-2022;Later
+3;1,2,3;28-10-2022;Exit
