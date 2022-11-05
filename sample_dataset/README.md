@@ -23,6 +23,6 @@ The dataset definition has the following contents:
 
 * _feedback.csv_: Contains the gathered feedback from a user in relationship with a connection specified by it's own _user_id_ and the _reciever_ids_
 
-| **user_id** | **reciever_ids**    | **date**                 | feedback_action |
+| **user_id** | **group_peers_ids**    | **date**                 | feedback_action |
 |-------------|---------------------|---------------------------------|--|
 | <user_id>   | <list of <user_id>> | <str in "dd-mm-YYYY" format> | <Helpful \| Exit \| Later> |
