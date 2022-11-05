@@ -64,7 +64,6 @@ class _ChatPreview extends StatelessWidget {
 
   final double height;
   final List<Chat> chats;
-
   @override
   Widget build(BuildContext context) {
     return MainContainer(
@@ -120,22 +119,46 @@ class _SocialBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var colors = <int, Color>{
+      0: Colors.red,
+      1: Colors.orange,
+      2: Colors.yellow,
+      3: Colors.green,
+      4: Colors.green.shade900,
+    };
     return Container(
       height: height * 0.125,
       margin: const EdgeInsets.only(left: 20, top: 20),
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
-          itemCount: users.length,
+          itemCount: users.length - 1,
           itemBuilder: (context, index) {
-            User user = users[index];
+            User user = users[index + 1];
             return Container(
                 margin: const EdgeInsets.only(right: 10),
                 child: Column(
                   children: [
-                    CircleAvatar(
-                        radius: 35,
-                        backgroundImage: AssetImage(user.imagePath)),
+                    Stack(
+                      children: [
+                        CircleAvatar(
+                            radius: 35,
+                            backgroundImage: AssetImage(user.imagePath)),
+                        Positioned.fill(
+                            child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: Container(
+                            width: 20,
+                            height: 20,
+                            decoration: BoxDecoration(
+                              // border: Border.all(color: Colors.black),
+                              shape: BoxShape.circle,
+                              color: colors[user.mood],
+                            ),
+                          ),
+                        ))
+                      ],
+                    ),
                     const SizedBox(height: 10),
                     Text(
                       user.name,
@@ -143,7 +166,7 @@ class _SocialBar extends StatelessWidget {
                           .textTheme
                           .bodyMedium!
                           .copyWith(fontWeight: FontWeight.bold),
-                    )
+                    ),
                   ],
                 ));
           }),
