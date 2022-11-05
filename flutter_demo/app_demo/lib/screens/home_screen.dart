@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Main Menu',
+            'My Profile',
             style: Theme.of(context)
                 .textTheme
                 .titleLarge!
@@ -68,8 +68,16 @@ class _BottomBar extends StatelessWidget {
         width: width * 0.5,
         margin: const EdgeInsets.only(bottom: 30),
         decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).colorScheme.primary.withAlpha(150),
+                spreadRadius: 4,
+                blurRadius: 7,
+                offset: const Offset(0, 3),
+              )
+            ],
             borderRadius: BorderRadius.circular(15),
-            color: Theme.of(context).colorScheme.secondary.withAlpha(150)),
+            color: Theme.of(context).colorScheme.primary.withAlpha(200)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -78,13 +86,16 @@ class _BottomBar extends StatelessWidget {
               color: Colors.transparent,
               child: IconButton(
                   onPressed: () {},
-                  icon: const Icon(Icons.person_outline_outlined)),
+                  icon: const Icon(
+                      color: Colors.black, Icons.person_outline_outlined)),
             ),
-            const SizedBox(width: 20),
+            const SizedBox(width: 30),
             Material(
               color: Colors.transparent,
               child: IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.message_outlined)),
+                  onPressed: () {},
+                  icon:
+                      const Icon(color: Colors.black, Icons.message_outlined)),
             ),
           ],
         ),
