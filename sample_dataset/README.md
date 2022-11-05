@@ -9,7 +9,7 @@ The dataset definition has the following contents:
         "<user_id>" : {
             "age" : "<integer>",
             "gender" : "<Female | Male | Other>" ,
-            "occupation_status" : "<Student & Employed | Student | Employed | Unemployed)>",
+            "occupation_status" : "<Student & Employed | Student | Employed | Unemployed>",
             "description" : "<string>"
         }
     }
