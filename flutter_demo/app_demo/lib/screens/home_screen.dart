@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../models/user_model.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    List<User> users = User.users;
+
     return Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -23,10 +29,26 @@ class HomeScreen extends StatelessWidget {
                   .titleLarge!
                   .copyWith(fontWeight: FontWeight.bold),
             ),
-            centerTitle: true,
+            centerTitle: false,
             elevation: 0,
           ),
-          body: Container(),
+          body: Container(
+            child: Column(children: [
+              Container(
+                height: height * 0.125,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: users.length,
+                    itemBuilder: (context, index) {
+                      User user = users[index];
+                      return CircleAvatar(
+                          radius: 35,
+                          backgroundImage: AssetImage(user.imagePath));
+                    }),
+              )
+            ]),
+          ),
         ));
   }
 }
