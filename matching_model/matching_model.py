@@ -8,12 +8,14 @@ from matching_data import get_evolution_exponential_weighted_decay, get_tokeniza
 
 
 def embeddings_distance(flattened_embeddings1: Tensor, flattened_embeddings2: Tensor):
+  """Computes the cosine similarity between two embeddings"""
   cos_sim = nn.CosineSimilarity(dim=1, eps=1e-6)
   return cos_sim(flattened_embeddings1, flattened_embeddings2)
 
 
 class MatchingLoss(nn.Module):
   def __init__(self, margin: float, alpha: float, beta: float, tau: float = 0.5):
+    """Initializes the loss function with the given hyperparameters"""
     super(MatchingLoss, self).__init__()
     self.margin = Tensor([margin])
     self.alpha = Tensor([alpha])
@@ -22,6 +24,7 @@ class MatchingLoss(nn.Module):
     self.sigmoid = nn.Sigmoid()
 
   def forward(self, user_embeddings: Tensor, peer_embeddings: Tensor, feedback: int, evolution: float, user_profile_features: Tensor, peer_profile_features: Tensor) -> float:
+    """Computes the constrastive loss for a given pair of embeddings and additional user information"""
     feedback = Tensor([feedback])
     evolution = Tensor([evolution])
 
@@ -37,6 +40,7 @@ class MatchingLoss(nn.Module):
 
 
 def retrain(user_id: int, group_peers_ids: List[int], user_feedback: int, tokenizer, optimizer, model, matching_loss, device):
+  """Retrains the model for a given user and a given group of peers. Should be used each time a user gives feedback"""
   model.train()
   user_evolution = get_evolution_exponential_weighted_decay(user_id)
   profile_features = profiles_feature_extraction(group_peers_ids)
@@ -51,7 +55,9 @@ def retrain(user_id: int, group_peers_ids: List[int], user_feedback: int, tokeni
     loss.backward()
     optimizer.step()
 
+
 def k_closest_embeddings(user_id: int, k: int, model, tokenizer):
+  """Returns the k closest embeddings to the given user to be used for the group making"""
   flattened_user_embeddings = model(get_tokenization(user_id, tokenizer))[0].view(1, -1)
   all_user_ids = get_all_user_ids()
   all_user_ids.remove(user_id)
