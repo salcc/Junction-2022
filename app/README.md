@@ -1,4 +1,4 @@
-# flutter_demo
+# App
 
 This folder contains the demo for the social media app we thought out. It is entirely built with [flutter](https://docs.flutter.dev/).
 
