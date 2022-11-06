@@ -90,13 +90,30 @@ class _ProfileBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '${user.name} ${user.surname}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge!
-                        .copyWith(fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.left,
+                  Row(
+                    children: [
+                      Text(
+                        '${user.name} ${user.surname}',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge!
+                            .copyWith(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(width: 80),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            // border: Border.all(color: Colors.black),
+                            shape: BoxShape.circle,
+                            color: colors[user.mood],
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                   const SizedBox(height: 10),
                   Text('${user.age}, ${user.gender}',

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:app_demo/models/models.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -73,7 +74,7 @@ class MoodBarChartState extends State<MoodBarChart> {
     int x,
     double y, {
     bool isTouched = false,
-    Color barColor = Colors.black,
+    Color? barColor = Colors.black,
     double width = 22,
     List<int> showTooltips = const [],
   }) {
@@ -81,15 +82,15 @@ class MoodBarChartState extends State<MoodBarChart> {
       x: x,
       barRods: [
         BarChartRodData(
-          toY: isTouched ? y + 1 : y,
+          toY: isTouched ? y + 0.1 : y,
           color: barColor,
           width: width,
           borderSide: isTouched
-              ? BorderSide(color: Colors.white, width: 2)
-              : const BorderSide(color: Colors.white, width: 0),
+              ? const BorderSide(color: Colors.black, width: 2)
+              : const BorderSide(color: Colors.black, width: 0.5),
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
-            toY: 20,
+            toY: 5,
             color: barBackgroundColor,
           ),
         ),
@@ -101,19 +102,26 @@ class MoodBarChartState extends State<MoodBarChart> {
   List<BarChartGroupData> showingGroups() => List.generate(7, (i) {
         switch (i) {
           case 0:
-            return makeGroupData(0, 5, isTouched: i == touchedIndex);
+            return makeGroupData(0, 2,
+                isTouched: i == touchedIndex, barColor: colors[1]);
           case 1:
-            return makeGroupData(1, 6.5, isTouched: i == touchedIndex);
+            return makeGroupData(1, 3,
+                isTouched: i == touchedIndex, barColor: colors[2]);
           case 2:
-            return makeGroupData(2, 5, isTouched: i == touchedIndex);
+            return makeGroupData(2, 4,
+                isTouched: i == touchedIndex, barColor: colors[3]);
           case 3:
-            return makeGroupData(3, 7.5, isTouched: i == touchedIndex);
+            return makeGroupData(3, 2,
+                isTouched: i == touchedIndex, barColor: colors[1]);
           case 4:
-            return makeGroupData(4, 9, isTouched: i == touchedIndex);
+            return makeGroupData(4, 4,
+                isTouched: i == touchedIndex, barColor: colors[3]);
           case 5:
-            return makeGroupData(5, 11.5, isTouched: i == touchedIndex);
+            return makeGroupData(5, 3,
+                isTouched: i == touchedIndex, barColor: colors[2]);
           case 6:
-            return makeGroupData(6, 6.5, isTouched: i == touchedIndex);
+            return makeGroupData(6, 4,
+                isTouched: i == touchedIndex, barColor: colors[3]);
           default:
             return throw Error();
         }
@@ -160,7 +168,7 @@ class MoodBarChartState extends State<MoodBarChart> {
               ),
               children: <TextSpan>[
                 TextSpan(
-                  text: (rod.toY - 1).toString(),
+                  text: moods[(rod.toY - 0.1).round()],
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
