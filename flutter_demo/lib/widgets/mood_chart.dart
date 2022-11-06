@@ -168,7 +168,7 @@ class MoodBarChartState extends State<MoodBarChart> {
               ),
               children: <TextSpan>[
                 TextSpan(
-                  text: moods[(rod.toY - 0.1).round()],
+                  text: moods[(rod.toY - 0.1).round() - 1],
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
