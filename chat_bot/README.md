@@ -54,16 +54,14 @@ learning problem (where no probability distributions are known, of course), that
 SARSA, expected SARSA, Q-learning or double Q-learning.
 
 #### Hyperparameters of the model
-A set of parameters are introduced in the model, $$\gamma,\quad\alpha,\quad\epdilon$$ and n_episodes. Don't worry about them, they are choices in terms of how the optimization is done, the choice is just the usual one.
+A set of parameters are introduced in the model, $$\gamma,\quad\alpha,\quad\epsilon$$ and n_episodes. Don't worry about them, they are choices in terms of how the optimization is done, the choice is just the usual one.
 
 #### Metrics of the model
 Three metrics will be saved of the model: Q_FUN, V_FUN and Policy. This saves what is the policy, that is, the set of actions, obtained every time we use the algorithm. Once a conversation is produced, we will use this policy, and as it is happening, it will be optimized, then it will be saved for the next use. This will hapen every time is used, for ever (or until an optimum one is obtained) and therefore the algorithm will keep getting better and better.
 
-#### Some links were we have found useful expressions
-Set of possible topics:
-https://parade.com/969981/parade/conversation-starters/
-
-Sources for bad expressions:
-https://dictionary.cambridge.org/grammar/british-grammar/swearing-and-taboo-expressions
-https://www.businessinsider.com/offensive-phrases-that-people-still-use-2013-11?r=US&IR=T#1-the-itis-1
-https://www.macmillandictionary.com/thesaurus-category/british/impolite-and-offensive-expressions-used-when-annoyed-or-angry
+#### Links of interest
+- [Topics](https://parade.com/969981/parade/conversation-starters/)
+- Bad expressions
+    - [Cambridge](https://dictionary.cambridge.org/grammar/british-grammar/swearing-and-taboo-expressions)
+    - [Business Insider](https://www.businessinsider.com/offensive-phrases-that-people-still-use-2013-11?r=US&IR=T#1-the-itis-1)
+    - [Macmillan](https://www.macmillandictionary.com/thesaurus-category/british/impolite-and-offensive-expressions-used-when-annoyed-or-angry)
