@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../models/chat_model.dart';
-import '../models/message_model.dart';
-import '../models/user_model.dart';
+import '../models/models.dart';
+
 import '../widgets/bottom_bar.dart';
 import '../widgets/main_container.dart';
 
@@ -119,13 +118,6 @@ class _SocialBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var colors = <int, Color>{
-      0: Colors.red,
-      1: Colors.orange,
-      2: Colors.yellow,
-      3: Colors.green,
-      4: Colors.green.shade900,
-    };
     return Container(
       height: height * 0.15,
       margin: const EdgeInsets.only(left: 20, top: 20),
