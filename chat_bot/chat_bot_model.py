@@ -131,7 +131,7 @@ class ChatBotModel:
 
     def reward(self, message: str) -> float:
         return (
-            message[0] ** 2 + 0.3 * message[1] - 10 * message[2] - 0.5 * message[3] ** 2
+            message[0] ** 2 + 2 * message[1] ** 2 - 10 * message[2] ** 2 - 0.5 * message[3]
         )
 
 

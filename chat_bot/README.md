@@ -23,11 +23,11 @@ That said, how do we define our space to make them fit for our problem?
 The state of a conversation will be a set of measures in which we measure a message and the time between
 that message and the previous message. Another state must be defined for the case we don't get an answer by the other user (after an explicit amount
 of time has passed, for example). What are the metrics chosen for a state?
--Lenght in words of a message. If it has less than 5 words it is set to 1, if it has less than 10 and 5 or more it is set to 2 and so on,
+-Lenght in words of a message (L). If it has less than 5 words it is set to 1, if it has less than 10 and 5 or more it is set to 2 and so on,
 until a maximum of 25 words or more, in that case it is set to 6.
--Expressivity: number of '?' and '!' present in the message, until a maximum of 15: that is a measure of intensity and expressivity of a message, we will try to maximize this.
+-Expressivity: number of '?' and '!' (E) present in the message, until a maximum of 15: that is a measure of intensity and expressivity of a message, we will try to maximize this.
 -Bad expressions detector (BE): if there is some bad language detected automatically warning messages will appear. This is a binary variable.
--Time between this and the previous message, also in a measure that reduces our sample space (<1min, 1-2min, 3-5min, 5-30min, 30-2h, 2-8h, 8h-2d, 2-5d, +5d).
+-Time between this and the previous message (T), also in a measure that reduces our sample space (<1min, 1-2min, 3-5min, 5-30min, 30-2h, 2-8h, 8h-2d, 2-5d, +5d).
 Note that this produces a finite (and quite small) number of states.
 A state is a tuple of for elements, each one with a number of possibilities (6, 15, 2 and 9). The initial state (without previous message) will be represented by [0,0,0,0].
 
@@ -47,7 +47,7 @@ maximize the lenght of that message, in order to obtain a goof fluidity of the c
 
 What is the reward function?
 Some weighted norm of this components, or a function of them should work. For example:
-L\^2 + 0.5T\4 + 0.3P + 0.3E
+L\^2 + 2E\^2 - 10BE\^2 - 0.5E
 
 Note that after a state, an action is chosen, and that gives us an answer (or not), and that produces a reward. That defines a typical reinforcement
 learning problem (where no probability distributions are known, of course), that can be optimized using temporal difference (TD) algorithms like
