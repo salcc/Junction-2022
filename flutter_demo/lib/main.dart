@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: customTheme(),
         initialRoute: '/status',
+        debugShowCheckedModeBanner: false,
         getPages: [
           GetPage(name: '/status', page: () => const StatusScreen()),
           GetPage(name: '/profile', page: () => const ProfileScreen()),
