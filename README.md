@@ -17,3 +17,6 @@ We have built a data-driven platform that allows users to:
  * Conversation data defining an environment for a virtual chat assistant dealing with ice-breakers, destructive conversations,etc. aiming to maximize connection quality.
 
 The more usage the app has the better performance the AI could bring.
+
+### Video Demo
+We are preparing a video demo (coming soon)
