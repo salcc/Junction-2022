@@ -18,8 +18,9 @@ We have built a data-driven platform that allows users to:
 
 The more usage the app has the better performance the AI could bring.
 
-### Video Demo:
-We are preparing a video demo (coming soon)
+### Videos:
+- [Submission](https://youtu.be/q_oVIC1yp3Q)
+- [Demo](https://youtu.be/PHOa-SYgnZo)
 
 ### Authors:
 [Jordi Baroja](https://www.linkedin.com/in/jordi-baroja-209b99225/)  
