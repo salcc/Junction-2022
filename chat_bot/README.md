@@ -43,11 +43,11 @@ by the users itself.
 
 #### Rewards:
 We need to define a measure of reward that we want to obtimize. A reasonable idea is to minimize the time of getting an answer and
-maximize the lenght of that message, in order to obtain a goof fluency of the conversation.
+maximize the lenght of that message, in order to obtain a goof fluidity of the conversation.
 
 What is the reward function?
 Some weighted norm of this components, or a function of them should work. For example:
-L**2 + 0.5T**4 + 0.3P + 0.3E
+L\^2 + 0.5T\4 + 0.3P + 0.3E
 
 Note that after a state, an action is chosen, and that gives us an answer (or not), and that produces a reward. That defines a typical reinforcement
 learning problem (where no probability distributions are known, of course), that can be optimized using temporal difference (TD) algorithms like
