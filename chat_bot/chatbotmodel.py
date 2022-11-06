@@ -1,5 +1,6 @@
 import numpy as np
 import seaborn as sns
+from os.path import exists
 
 from random import random, randint
 
@@ -41,9 +42,16 @@ class Chat():
         self.INI_STATE = 0
 
         # Define action-value function
-        self.Q_FUN = np.zeros((self.N_STATES, self.N_ACTIONS))
+        if exists('CurrentQ_FUN.txt'):
+            self.Q_FUN = np.loadtxt('CurrentQ_FUN.txt', delimiter=',')
+        else:
+            self.Q_FUN = np.zeros((self.N_STATES, self.N_ACTIONS))
+
         # Define state-value function only for plotting purposes
-        self.V_FUN = np.zeros(self.N_STATES)
+        if exists('CurrentV_FUN.txt'):
+            self.V_FUN = [float(line[:-1]) for line in open('CurrentV_FUN.txt', 'r')]
+        else:
+            self.V_FUN = np.zeros(self.N_STATES)
 
     def _read_lines_from_txt(self, path):
         file = open(path, 'r')
@@ -70,9 +78,9 @@ class Chat():
             tupleT = [0,0,0,0]
             ss = state - 1
             tupleT[0] = ss // (self.TIME_RANGES*self.BAD_LANGUAGE*self.EXPRESSIVITY)
-            aux = ss % self.TIME_RANGES*self.BAD_LANGUAGE*self.EXPRESSIVITY
+            aux = ss % (self.TIME_RANGES*self.BAD_LANGUAGE*self.EXPRESSIVITY)
             tupleT[1] = aux // (self.TIME_RANGES*self.BAD_LANGUAGE)
-            aux2 = aux % self.TIME_RANGES*self.BAD_LANGUAGE
+            aux2 = aux % (self.TIME_RANGES*self.BAD_LANGUAGE)
             tupleT[2] = aux2 // self.TIME_RANGES
             aux3 = aux2 % self.TIME_RANGES
             tupleT[3] = aux3
@@ -113,7 +121,7 @@ class Chat():
         Message = message.split()
         count = len(Message)
         count2 = message.count('?') + message.count('!')
-        
+
         for expr in self.BAD_EXPR:
             if message.find(expr) != -1:
                 return np.array([min(((count-1)//5)+1, 6), min(count2+1, 15), 2, self.encode_time(int(Message[len(Message)-1]))])
@@ -194,7 +202,7 @@ class Chat():
         - int: next_action in {0,..., N_ACTIONS-1}
     '''
     def q_learning(self, state, action):
-        print("Introdueix un missatge acabat en un numero que representa els minuts d'espera que has trigat a contestar: ")
+        print("Insert a message followed by the time it took to answer: ")
         message = str(input())
         next_state, reward = self.next_position(message)
 
@@ -205,11 +213,13 @@ class Chat():
         self.Q_FUN[state, action] += self.ALPHA*(reward + self.GAMMA*self.Q_FUN[next_state, off_policy_action] - self.Q_FUN[state, action])
 
         next_action = self.greedy_policy(next_state)
+
         return next_state, next_action
 
 
 
 chat = Chat()
+
 for i in range(chat.N_EPISODES):
     state = chat.INI_STATE
     action = chat.greedy_policy(state)
@@ -223,6 +233,6 @@ for i in range(chat.N_EPISODES):
 
         n_count += 1
     if i==0:
-        np.savetxt('CurrentQ_FUN.txt',chat.Q_FUN,fmt='%.4f')
-        np.savetxt('CurrentV_FUN.txt',chat.V_FUN,fmt='%.4f')
+        np.savetxt('CurrentQ_FUN.txt',chat.Q_FUN,delimiter=',',fmt='%.4f')
+        np.savetxt('CurrentV_FUN.txt',chat.compute_v_fun(),fmt='%.4f')
         np.savetxt('CurrentPolicy.txt',chat.compute_actions(),fmt='%.4f')
