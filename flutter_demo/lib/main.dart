@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         title: 'Flutter Demo',
         theme: customTheme(),
-        initialRoute: '/profile',
+        initialRoute: '/status',
         getPages: [
           GetPage(name: '/status', page: () => const StatusScreen()),
           GetPage(name: '/profile', page: () => const ProfileScreen()),

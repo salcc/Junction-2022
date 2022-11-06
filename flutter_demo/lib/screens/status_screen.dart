@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../models/user_model.dart';
-import '../widgets/bottom_bar.dart';
-import '../widgets/mood_chart.dart';
+import '../models/models.dart';
 
 class StatusScreen extends StatelessWidget {
   const StatusScreen({Key? key}) : super(key: key);
@@ -25,25 +24,16 @@ class StatusScreen extends StatelessWidget {
       child: Scaffold(
         body: Column(children: [
           const SizedBox(height: 25),
-          _ProfileBar(height: height, width: width, user: users[0]),
-          Expanded(
-            child: Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                const Padding(
-                    padding: EdgeInsets.all(20.0), child: MoodBarChart()),
-                BottomBar(width: width),
-              ],
-            ),
-          ),
+          _Salute(height: height, width: width, user: users[0]),
+          _Emotions(height: height),
         ]),
       ),
     );
   }
 }
 
-class _ProfileBar extends StatelessWidget {
-  const _ProfileBar({
+class _Salute extends StatelessWidget {
+  const _Salute({
     Key? key,
     required this.height,
     required this.width,
@@ -58,19 +48,9 @@ class _ProfileBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: height * 0.2,
-        margin: const EdgeInsets.only(left: 20, top: 20),
+        margin: const EdgeInsets.only(left: 20, top: 150),
         child: Row(
           children: [
-            Container(
-                alignment: Alignment.centerLeft,
-                margin: const EdgeInsets.only(left: 10, right: 10),
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                        radius: 60,
-                        backgroundImage: AssetImage(user.imagePath)),
-                  ],
-                )),
             Container(
               alignment: Alignment.centerLeft,
               margin: const EdgeInsets.only(left: 20, top: 10),
@@ -80,7 +60,7 @@ class _ProfileBar extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${user.name} ${user.surname}',
+                    'Hi ${user.name} ${user.surname}!',
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge!
@@ -88,22 +68,55 @@ class _ProfileBar extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                   const SizedBox(height: 10),
-                  Text('${user.age}, ${user.gender}',
+                  Text('How are you doing today?',
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium!
                           .copyWith(fontWeight: FontWeight.bold),
                       textAlign: TextAlign.left),
                   const SizedBox(height: 10),
-                  Text(
-                    user.description,
-                    style: Theme.of(context).textTheme.bodySmall,
-                    textAlign: TextAlign.justify,
-                  ),
                 ],
               ),
             )
           ],
         ));
+  }
+}
+
+class _Emotions extends StatelessWidget {
+  const _Emotions({
+    Key? key,
+    required this.height,
+  }) : super(key: key);
+
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height * 0.15,
+      margin: const EdgeInsets.only(left: 20, top: 10),
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          shrinkWrap: true,
+          itemCount: colors.length,
+          itemBuilder: (context, index) {
+            return IconButton(
+                iconSize: 60,
+                onPressed: () {
+                  Get.toNamed('/profile');
+                },
+                icon: Container(
+                  margin: const EdgeInsets.only(right: 15),
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black),
+                    shape: BoxShape.circle,
+                    color: colors[index],
+                  ),
+                ));
+          }),
+    );
   }
 }
