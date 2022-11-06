@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../models/chat_model.dart';
-import '../models/message_model.dart';
-import '../models/user_model.dart';
+import '../models/models.dart';
+
+import '../widgets/bottom_bar.dart';
 import '../widgets/main_container.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class SocialScreen extends StatelessWidget {
+  const SocialScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'My Profile',
+            'Social',
             style: Theme.of(context)
                 .textTheme
                 .titleLarge!
@@ -44,61 +44,11 @@ class HomeScreen extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 _ChatPreview(height: height, chats: chats),
-                _BottomBar(width: width),
+                BottomBar(width: width),
               ],
             ),
           ),
         ]),
-      ),
-    );
-  }
-}
-
-class _BottomBar extends StatelessWidget {
-  const _BottomBar({Key? key, required this.width}) : super(key: key);
-
-  final double width;
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Container(
-        height: 65,
-        width: width * 0.5,
-        margin: const EdgeInsets.only(bottom: 30),
-        decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).colorScheme.primary.withAlpha(150),
-                spreadRadius: 4,
-                blurRadius: 7,
-                offset: const Offset(0, 3),
-              )
-            ],
-            borderRadius: BorderRadius.circular(15),
-            color: Theme.of(context).colorScheme.primary.withAlpha(200)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Material(
-              color: Colors.transparent,
-              child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                      color: Colors.black, Icons.person_outline_outlined)),
-            ),
-            const SizedBox(width: 30),
-            Material(
-              color: Colors.transparent,
-              child: IconButton(
-                  onPressed: () {},
-                  icon:
-                      const Icon(color: Colors.black, Icons.message_outlined)),
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -113,7 +63,6 @@ class _ChatPreview extends StatelessWidget {
 
   final double height;
   final List<Chat> chats;
-
   @override
   Widget build(BuildContext context) {
     return MainContainer(
@@ -170,21 +119,40 @@ class _SocialBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height * 0.125,
+      height: height * 0.15,
       margin: const EdgeInsets.only(left: 20, top: 20),
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
-          itemCount: users.length,
+          itemCount: users.length - 2,
           itemBuilder: (context, index) {
-            User user = users[index];
+            User user = users[index + 2];
             return Container(
                 margin: const EdgeInsets.only(right: 10),
                 child: Column(
                   children: [
-                    CircleAvatar(
-                        radius: 35,
-                        backgroundImage: AssetImage(user.imagePath)),
+                    Padding(
+                        padding: const EdgeInsets.only(left: 7, right: 7),
+                        child: Stack(
+                          children: [
+                            CircleAvatar(
+                                radius: 35,
+                                backgroundImage: AssetImage(user.imagePath)),
+                            Positioned.fill(
+                                child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: Container(
+                                width: 20,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                  // border: Border.all(color: Colors.black),
+                                  shape: BoxShape.circle,
+                                  color: colors[user.mood],
+                                ),
+                              ),
+                            ))
+                          ],
+                        )),
                     const SizedBox(height: 10),
                     Text(
                       user.name,
@@ -192,7 +160,7 @@ class _SocialBar extends StatelessWidget {
                           .textTheme
                           .bodyMedium!
                           .copyWith(fontWeight: FontWeight.bold),
-                    )
+                    ),
                   ],
                 ));
           }),

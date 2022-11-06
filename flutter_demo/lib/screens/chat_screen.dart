@@ -54,8 +54,11 @@ class _ChatScreenState extends State<ChatScreen> {
                         itemBuilder: (context, index) {
                           Message message = chat.messages[index];
                           return Align(
-                              alignment: (message.senderId == '1')
-                                  ? Alignment.centerRight
+                              alignment: (message.senderId == '1' ||
+                                      message.senderId == '99')
+                                  ? ((message.senderId == '1')
+                                      ? Alignment.centerRight
+                                      : Alignment.center)
                                   : Alignment.centerLeft,
                               child: Container(
                                 constraints: BoxConstraints(
@@ -64,8 +67,13 @@ class _ChatScreenState extends State<ChatScreen> {
                                             0.66),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: (message.senderId == '1')
-                                        ? Theme.of(context).colorScheme.primary
+                                    color: (message.senderId == '1' ||
+                                            message.senderId == '99')
+                                        ? ((message.senderId == '1')
+                                            ? Theme.of(context)
+                                                .colorScheme
+                                                .primary
+                                            : Colors.white)
                                         : Theme.of(context)
                                             .colorScheme
                                             .secondary),
@@ -77,6 +85,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                         Theme.of(context).textTheme.bodyMedium),
                               ));
                         })),
+                const SizedBox(height: 10),
                 TextFormField(
                     controller: textEditingController,
                     onChanged: (value) {
@@ -88,7 +97,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         filled: true,
                         fillColor: Theme.of(context)
                             .colorScheme
-                            .secondary
+                            .primary
                             .withAlpha(150),
                         hintText: 'Type here',
                         hintStyle: Theme.of(context).textTheme.bodyMedium,
@@ -146,18 +155,13 @@ class _CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                   .textTheme
                   .bodyLarge!
                   .copyWith(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 5),
-            Text(
-              'Online',
-              style: Theme.of(context).textTheme.bodySmall,
             )
           ],
         ),
         elevation: 0,
         actions: [
           Container(
-              margin: const EdgeInsets.only(right: 10),
+              margin: const EdgeInsets.only(right: 25),
               child: CircleAvatar(
                 backgroundImage: AssetImage(user.imagePath),
               ))
