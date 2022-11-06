@@ -1,13 +1,9 @@
 ## Matching model
-Meta-model containing:
+Usage implementation based on a [Large pretrained embedding transformer](https://arxiv.org/abs/2004.05150) mapping documents to latent space representations [based on similarities](https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
 
- * Large pretrained embedding transformer mapping documents to latent space representations based on similarities
+The key aspect is the fact that the model is re-trained with a metric lerning approach taking into consideration the feedback and status data that the application gathers from user's usage. 
 
- * User profile information
-
-The model is re-trained through a metric lerning approach based on a custom adaptation of a contrastive loss which considers user feedback and status tracking data.
-
-The loss function is an adaptation of a contrastive loss for metric learning to the data we are able to extract through user application usage. It is defined mathematically as follows (expression + decomposition):
+The loss function is an adaptation of a contrastive loss considering the gathered data from the application. It is defined mathematically as follows (expression + decomposition):
 
 
 <img src="loss_def.png" alt="sdef" height="25" width="1500"/>
@@ -20,3 +16,5 @@ with $x_j$ being the time instance j and $h(x_{j})$ the reported status value wh
  $f$ is the large language model, $g$ is a static embedder for user profile data, $\sigma$ is the sigmoid function.
 
 * Parameters: $\alpha$ wheights the contribution of the feedback categorization, $\beta$ weights the contribution of the reporting scores, $\tau$ is the switcher thresohld which tells the part of the loss to evaluate, $m$ is the margin for the max function in pseudo-negative case and $\theta$ are the model weights.
+
+This function allows us to categorize whether a pair of embeddings should be closer or further based on the extracted features representing connection quality and to penalize the model accordingly. The more active user we have and the larger amounts of data we can gather from their connections the better should our model be.
