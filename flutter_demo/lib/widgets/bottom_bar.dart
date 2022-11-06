@@ -15,16 +15,18 @@ class BottomBar extends StatelessWidget {
         width: width * 0.5,
         margin: const EdgeInsets.only(bottom: 30),
         decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).colorScheme.primary.withAlpha(150),
-                spreadRadius: 4,
-                blurRadius: 7,
-                offset: const Offset(0, 3),
-              )
-            ],
+            // boxShadow: [
+            //   BoxShadow(
+            //     // color: Theme.of(context).colorScheme.primary.withAlpha(150),
+            //     color: Colors.blue.withAlpha(150),
+            //     spreadRadius: 4,
+            //     blurRadius: 7,
+            //     offset: const Offset(0, 3),
+            //   )
+            // ],
             borderRadius: BorderRadius.circular(15),
-            color: Theme.of(context).colorScheme.primary.withAlpha(255)),
+            // color: Theme.of(context).colorScheme.primary.withAlpha(255)),
+            color: Colors.blue),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,

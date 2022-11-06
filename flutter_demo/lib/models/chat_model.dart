@@ -35,6 +35,18 @@ class Chat {
                 (message.recipientId == '1' || message.recipientId == '2'),
           )
           .toList(),
+    ),
+    Chat(
+      id: '1',
+      users:
+          User.users.where((user) => user.id == '1' || user.id == '3').toList(),
+      messages: Message.messages
+          .where(
+            (message) =>
+                (message.senderId == '1' || message.senderId == '3') &
+                (message.recipientId == '1' || message.recipientId == '3'),
+          )
+          .toList(),
     )
   ];
 }

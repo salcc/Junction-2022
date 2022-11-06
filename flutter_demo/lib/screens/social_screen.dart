@@ -127,38 +127,40 @@ class _SocialBar extends StatelessWidget {
       4: Colors.green.shade900,
     };
     return Container(
-      height: height * 0.125,
+      height: height * 0.15,
       margin: const EdgeInsets.only(left: 20, top: 20),
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
-          itemCount: users.length - 1,
+          itemCount: users.length - 2,
           itemBuilder: (context, index) {
-            User user = users[index + 1];
+            User user = users[index + 2];
             return Container(
                 margin: const EdgeInsets.only(right: 10),
                 child: Column(
                   children: [
-                    Stack(
-                      children: [
-                        CircleAvatar(
-                            radius: 35,
-                            backgroundImage: AssetImage(user.imagePath)),
-                        Positioned.fill(
-                            child: Align(
-                          alignment: Alignment.bottomRight,
-                          child: Container(
-                            width: 20,
-                            height: 20,
-                            decoration: BoxDecoration(
-                              // border: Border.all(color: Colors.black),
-                              shape: BoxShape.circle,
-                              color: colors[user.mood],
-                            ),
-                          ),
-                        ))
-                      ],
-                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(left: 7, right: 7),
+                        child: Stack(
+                          children: [
+                            CircleAvatar(
+                                radius: 35,
+                                backgroundImage: AssetImage(user.imagePath)),
+                            Positioned.fill(
+                                child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: Container(
+                                width: 20,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                  // border: Border.all(color: Colors.black),
+                                  shape: BoxShape.circle,
+                                  color: colors[user.mood],
+                                ),
+                              ),
+                            ))
+                          ],
+                        )),
                     const SizedBox(height: 10),
                     Text(
                       user.name,
