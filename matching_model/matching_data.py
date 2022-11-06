@@ -75,3 +75,9 @@ def profiles_feature_extraction(ids: list):
                                              *gender_mapping[user_profile["gender"]],
                                              *occupation_mapping[user_profile["occupation"]]]).view(1, -1)
   return profile_feature_map
+
+
+def get_all_user_ids() -> List[int]:
+  with open(f"{data_folder}/profiles.json", "r") as profiles_file:
+    profiles = json.load(profiles_file)
+    return list(map(int, profiles.keys()))

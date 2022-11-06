@@ -50,3 +50,13 @@ def retrain(user_id: int, group_peers_ids: List[int], user_feedback: int, tokeni
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
+
+def k_closest_embeddings(user_id: int, k: int, model, tokenizer):
+  flattened_user_embeddings = model(get_tokenization(user_id, tokenizer))[0].view(1, -1)
+  all_user_ids = get_all_user_ids()
+  all_user_ids.remove(user_id)
+  distances = []
+  for other_user_id in all_user_ids:
+    other_tokenization = get_tokenization(other_user_id, tokenizer)
+    distances.append((other_user_id, embeddings_distance(flattened_user_embeddings, model(other_tokenization)[0].view(1, -1))))
+  return sorted(distances, key=lambda x: x[1])[:k]
