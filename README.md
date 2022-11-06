@@ -22,8 +22,8 @@ The more usage the app has the better performance the AI could bring.
 We are preparing a video demo (coming soon)
 
 ### Authors:
-[Jordi Baroja](https://www.linkedin.com/in/jordi-baroja-209b99225/)
-[Marçal Comajoan](https://www.linkedin.com/in/marcal-comajoan/)
-[Mauro Filomeno](https://www.linkedin.com/in/maurofilomeno/)
-[Marc Franquesa](https://www.linkedin.com/in/marc-franquesa-mon%C3%A9s-0015661b2/)
+[Jordi Baroja](https://www.linkedin.com/in/jordi-baroja-209b99225/)  
+[Marçal Comajoan](https://www.linkedin.com/in/marcal-comajoan/)  
+[Mauro Filomeno](https://www.linkedin.com/in/maurofilomeno/)  
+[Marc Franquesa](https://www.linkedin.com/in/marc-franquesa-mon%C3%A9s-0015661b2/)  
 [Pol Puigdemont](https://www.linkedin.com/in/polpuigdemont/)
