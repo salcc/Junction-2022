@@ -86,8 +86,8 @@ class MoodBarChartState extends State<MoodBarChart> {
           color: barColor,
           width: width,
           borderSide: isTouched
-              ? const BorderSide(color: Colors.black, width: 2)
-              : const BorderSide(color: Colors.black, width: 0.5),
+              ? const BorderSide(color: Colors.black, width: 1.5)
+              : const BorderSide(color: Colors.black, width: 0),
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
             toY: 5,

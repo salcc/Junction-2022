@@ -54,8 +54,11 @@ class _ChatScreenState extends State<ChatScreen> {
                         itemBuilder: (context, index) {
                           Message message = chat.messages[index];
                           return Align(
-                              alignment: (message.senderId == '1')
-                                  ? Alignment.centerRight
+                              alignment: (message.senderId == '1' ||
+                                      message.senderId == '99')
+                                  ? ((message.senderId == '1')
+                                      ? Alignment.centerRight
+                                      : Alignment.center)
                                   : Alignment.centerLeft,
                               child: Container(
                                 constraints: BoxConstraints(
@@ -64,8 +67,13 @@ class _ChatScreenState extends State<ChatScreen> {
                                             0.66),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: (message.senderId == '1')
-                                        ? Theme.of(context).colorScheme.primary
+                                    color: (message.senderId == '1' ||
+                                            message.senderId == '99')
+                                        ? ((message.senderId == '1')
+                                            ? Theme.of(context)
+                                                .colorScheme
+                                                .primary
+                                            : Colors.white)
                                         : Theme.of(context)
                                             .colorScheme
                                             .secondary),
