@@ -45,7 +45,9 @@ class Chat {
       messages: Message.messages
           .where(
             (message) =>
-                (message.senderId == '1' || message.senderId == '3') &
+                (message.senderId == '1' ||
+                    message.senderId == '3' ||
+                    message.senderId == '99') &
                 (message.recipientId == '1' || message.recipientId == '3'),
           )
           .toList(),

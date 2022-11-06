@@ -117,8 +117,8 @@ class MoodBarChartState extends State<MoodBarChart> {
             return makeGroupData(4, 4,
                 isTouched: i == touchedIndex, barColor: colors[3]);
           case 5:
-            return makeGroupData(5, 3,
-                isTouched: i == touchedIndex, barColor: colors[2]);
+            return makeGroupData(5, 1,
+                isTouched: i == touchedIndex, barColor: colors[0]);
           case 6:
             return makeGroupData(6, 4,
                 isTouched: i == touchedIndex, barColor: colors[3]);
