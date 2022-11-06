@@ -7,6 +7,10 @@ from torch import Tensor, LongTensor
 data_folder = "../sample_dataset"
 
 def get_evolution_exponential_weighted_decay(user_id: int, rho: float = 0.5) -> float:
+  """
+  Gets the exponential weighted decay of the user's perception evolution,
+  which represents the progrssion of the user's emotions
+  """
   serie = []
   with open(f"{data_folder}/series.csv") as csvfile:
     data = csv.reader(csvfile, delimiter=';')
@@ -24,6 +28,7 @@ def get_evolution_exponential_weighted_decay(user_id: int, rho: float = 0.5) -> 
 
 
 def get_tokenization(user_id: int, tokenizer) -> List[int]:
+  """Gets the tokenization of the user's description, storing it to the JSON too if it was not already computed"""
   user_id = str(user_id)
   with open(f"{data_folder}/profiles.json", "r") as profiles_file:
     profiles = json.load(profiles_file)
@@ -54,6 +59,7 @@ def get_complete_feedback():
 
 
 def profiles_feature_extraction(ids: list):
+  """Gets the additional features of the users"""
   profile_feature_map = {}
   for user_id in ids:
     user_id = str(user_id)
@@ -78,6 +84,7 @@ def profiles_feature_extraction(ids: list):
 
 
 def get_all_user_ids() -> List[int]:
+  """Gets all the user ids"""
   with open(f"{data_folder}/profiles.json", "r") as profiles_file:
     profiles = json.load(profiles_file)
     return list(map(int, profiles.keys()))
